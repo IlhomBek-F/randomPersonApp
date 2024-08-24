@@ -1,34 +1,22 @@
-import { useState } from 'react';
 import {SearchBar} from '../components/SearchBar';
 import {UserCard} from '../components/UserCard'
 import {UserNotFound} from '../components/UserNotFound'
-
-const API = import.meta.env.VITE_GITHUB_API;
+import { Skeleton } from 'antd';
+import {useUser} from '../hooks/useUser';
 
 function SearchTab() {
-    const [user, setUser] = useState<null | any>();
-    
+    const {fetchUser, loading, user} = useUser();
+
     const handleSearch = async (name: string) => {
-       try {
-        const res = await fetch(`${API}/${name}`);
-        if(!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`)
-        }
-
-        const data= await res.json();
-        setUser(data)
-       } catch (error) {
-        setUser(null);
-        console.log(error)
-       } 
+       await fetchUser(name)
     }
-
-    
 
     return (
         <main>
-            <SearchBar handleSearch={handleSearch}/>
-            {user && <UserCard user={user}/> || <UserNotFound />}
+            <SearchBar handleSearch={handleSearch} loading={loading}/>
+            {loading ? <Skeleton avatar paragraph={{ rows: 2 }} /> : 
+                                         user && <UserCard user={user}/> || <UserNotFound />
+            }
         </main>
     )
 }

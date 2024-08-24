@@ -4,7 +4,7 @@ function UserNotFound() {
 
     return (
         <>
-         <p>User does not exist.</p>
+         <p style={{fontFamily: 'system-ui', color: '#797979'}}>User does not exist.</p>
         </>
     )
 }
