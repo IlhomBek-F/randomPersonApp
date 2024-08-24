@@ -1,0 +1,33 @@
+
+.user {
+    display: flex;
+}
+
+.user__photo {
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.card {
+    width: 400px;
+}
+
+.user__info h1 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.like {
+    color: rgb(6, 184, 244);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.like:hover {
+    color: rgb(0, 31, 203);
+}
