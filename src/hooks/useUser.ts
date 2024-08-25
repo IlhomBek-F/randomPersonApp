@@ -3,7 +3,7 @@ import { useState } from "react";
 const API = import.meta.env.VITE_GITHUB_API;
 
 function useUser() {
-    const [data, setUser] = useState<null | any>({user: null, loading: false});
+    const [data, setUser] = useState<null | any>({user: null, loading: false, error: null});
     
     const fetchUser = async (name: string) => {
         setUser({...data, loading: true})
@@ -15,14 +15,14 @@ function useUser() {
          }
  
          const data= await res.json();
-         setUser({user: data, loading: false});
+         setUser({user: data, loading: false, error: null});
 
         } catch (error) {
-         setUser({user: null, loading: false});
+         setUser({user: null, loading: false, error});
      }
     }
     
-return {fetchUser, loading: data.loading, user: data.user}
+return {fetchUser, loading: data.loading, user: data.user, error: data.error}
 }
 
 export {useUser}

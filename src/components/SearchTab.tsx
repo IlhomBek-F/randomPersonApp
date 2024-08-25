@@ -1,22 +1,32 @@
 import {SearchBar} from '../components/SearchBar';
 import {UserCard} from '../components/UserCard'
 import {UserNotFound} from '../components/UserNotFound'
-import { Skeleton } from 'antd';
 import {useUser} from '../hooks/useUser';
+import {SkeletonElem} from '../components/SkeletonElem';
 
 function SearchTab() {
-    const {fetchUser, loading, user} = useUser();
+    const {fetchUser, loading, user, error} = useUser();
 
     const handleSearch = async (name: string) => {
        await fetchUser(name)
     }
 
+    const DataComponent = () => {
+        if(loading) {
+            return <SkeletonElem />
+        }
+
+        if(error instanceof Error) {
+            return <UserNotFound />
+        }
+
+        return <UserCard user={user}/>
+    }
+
     return (
         <main>
             <SearchBar handleSearch={handleSearch} loading={loading}/>
-            {loading ? <Skeleton avatar paragraph={{ rows: 2 }} /> : 
-                                         user && <UserCard user={user}/> || <UserNotFound />
-            }
+            <DataComponent />
         </main>
     )
 }
