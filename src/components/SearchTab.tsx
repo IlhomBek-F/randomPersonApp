@@ -30,7 +30,7 @@ function SearchTab() {
 
     return (
         <main>
-            <Space.Compact style={{ width: '100%' }} className="search-bar">
+            <Space.Compact style={{ width: '100%', marginBottom: '10px'}}>
              <Input  value={inputValue} onChange={(e) => setInputValue(e.target.value)}  placeholder="search by username..."/>
              <Button type="primary" 
                      loading={loading}
