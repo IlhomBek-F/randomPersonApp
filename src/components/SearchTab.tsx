@@ -1,14 +1,19 @@
-import {SearchBar} from '../components/SearchBar';
 import {UserCard} from '../components/UserCard'
 import {UserNotFound} from '../components/UserNotFound'
 import {useUser} from '../hooks/useUser';
 import {SkeletonElem} from '../components/SkeletonElem';
+import { Button, Input, Space } from 'antd';
+import { useState } from 'react';
 
 function SearchTab() {
-    const {fetchUser, loading, user, error} = useUser();
+    const [inputValue, setInputValue] = useState<string>('');
 
-    const handleSearch = async (name: string) => {
-       await fetchUser(name)
+    const {fetchUser, loading, user, error} = useUser();
+    const userData = {avatar_url: user?.avatar_url, name: user?.name, location: user?.location};
+
+    const handleSearch = async () => {
+       await fetchUser(inputValue);
+       setInputValue('');
     }
 
     const DataComponent = () => {
@@ -20,12 +25,17 @@ function SearchTab() {
             return <UserNotFound />
         }
 
-        return <UserCard user={user}/>
+        return <UserCard {...userData}/>
     }
 
     return (
         <main>
-            <SearchBar handleSearch={handleSearch} loading={loading}/>
+            <Space.Compact style={{ width: '100%' }} className="search-bar">
+             <Input  value={inputValue} onChange={(e) => setInputValue(e.target.value)}  placeholder="search by username..."/>
+             <Button type="primary" 
+                     loading={loading}
+                     onClick={handleSearch}>Поиск</Button>
+             </Space.Compact>
             <DataComponent />
         </main>
     )

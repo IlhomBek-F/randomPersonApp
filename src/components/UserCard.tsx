@@ -2,9 +2,14 @@ import { Space, Card } from "antd"
 import '../styles/userCard.css';
 import { GlobalOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 
-function UserCard({user}: any) {
-    const {name = null, avatar_url, location} = user || {};
+export interface UserModel {
+    avatar_url?: string,
+    name?: string | null,
+    location?: string
+}
 
+function UserCard({name, avatar_url, location}: UserModel) {
+    
     return (
     <Space direction="vertical" size={16} >
         <Card className="card">

@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { UserModel } from "../components/UserCard";
 
 const API = import.meta.env.VITE_GITHUB_API;
 
+interface UserState {
+  user: UserModel | null,
+  loading: boolean,
+  error: any
+}
+
 function useUser() {
-    const [data, setUser] = useState<null | any>({user: null, loading: false, error: null});
+    const [data, setUser] = useState<UserState>({user: null, loading: false, error: null});
     
     const fetchUser = async (name: string) => {
         setUser({...data, loading: true})
@@ -22,7 +29,7 @@ function useUser() {
      }
     }
     
-return {fetchUser, loading: data.loading, user: data.user, error: data.error}
+   return {fetchUser, loading: data.loading, user: data.user, error: data.error}
 }
 
 export {useUser}
