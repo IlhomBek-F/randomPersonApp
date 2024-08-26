@@ -13,3 +13,15 @@ main {
 button:focus, button:focus-visible {
   outline: none !important;
 }
+
+.like {
+  color: rgb(6, 184, 244);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.like:hover {
+  color: rgb(0, 31, 203);
+}

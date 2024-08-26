@@ -12,6 +12,7 @@
 
 .card {
     width: 400px;
+    margin: 0 0 10px 0;
 }
 
 .user__info h1 {
@@ -22,16 +23,4 @@
 
 .user__info p {
     text-align: start;
-}
-
-.like {
-    color: rgb(6, 184, 244);
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-}
-
-.like:hover {
-    color: rgb(0, 31, 203);
 }
